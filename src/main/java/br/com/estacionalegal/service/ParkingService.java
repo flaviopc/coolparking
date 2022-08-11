@@ -1,5 +1,6 @@
 package br.com.estacionalegal.service;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,9 @@ public class ParkingService {
         var id = getUUID();
         var parking = new Parking(id, "license", "SE", "Fiat-Toro", "Branco");
         parkingMap.put(id, parking);
+        id = getUUID();
+        parking = new Parking(id, "license", "SE", "Gol-Volkswagem", "preto");
+        parkingMap.put(id, parking);
     }
 
     public List<Parking> findAll() {
@@ -25,5 +29,17 @@ public class ParkingService {
 
     private static String getUUID() {
         return UUID.randomUUID().toString().replace("-", "");
+    }
+
+    public Parking findById(String id) {
+        return parkingMap.get(id);
+    }
+
+    public Parking create(Parking parking) {
+        String uuid = getUUID();
+        parking.setId(uuid);
+        parking.setEntryDate(LocalDateTime.now());
+        parkingMap.put(uuid, parking);
+        return parking;
     }
 }

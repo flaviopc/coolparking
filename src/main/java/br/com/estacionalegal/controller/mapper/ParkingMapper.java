@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import br.com.estacionalegal.controller.dto.ParkingDTO;
+import br.com.estacionalegal.controller.dto.ParkingCreateDTO;
 import br.com.estacionalegal.model.Parking;
 
 @Component
@@ -20,6 +21,14 @@ public class ParkingMapper {
 
     public ParkingDTO parkingDTO(Parking parking) {
         return MODEL_MAPPER.map(parking, ParkingDTO.class);
+    }
+
+    public Parking toParking(ParkingDTO parkingDTO) {
+        return MODEL_MAPPER.map(parkingDTO, Parking.class);
+    }
+
+    public Parking toParking(ParkingCreateDTO parkingCreateDTO) {
+        return MODEL_MAPPER.map(parkingCreateDTO, Parking.class);
     }
 
 }
