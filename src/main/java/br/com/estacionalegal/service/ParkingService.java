@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import br.com.estacionalegal.exception.ParkingNotFoundException;
 import br.com.estacionalegal.model.Parking;
 
 @Service
@@ -32,7 +33,10 @@ public class ParkingService {
     }
 
     public Parking findById(String id) {
-        return parkingMap.get(id);
+        var parking = parkingMap.get(id);
+        if (parking == null)
+            throw new ParkingNotFoundException(id);
+        return parking;
     }
 
     public Parking create(Parking parking) {
@@ -42,4 +46,19 @@ public class ParkingService {
         parkingMap.put(uuid, parking);
         return parking;
     }
+
+    public Parking update(String id, Parking parking) {
+        Parking parkingUpdate = findById(id);
+        parkingUpdate.setColor(parking.getColor());
+        parkingUpdate.setState(parking.getState());
+        parkingUpdate.setLicense(parking.getLicense());
+        parkingMap.replace(id, parkingUpdate);
+        return parkingUpdate;
+    }
+
+    public void delete(String id) {
+        findById(id);
+        parkingMap.remove(id);
+    }
+
 }
