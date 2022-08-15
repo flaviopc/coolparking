@@ -45,6 +45,13 @@ public class ParkingController {
         return ResponseEntity.ok(result);
     }
 
+    @PostMapping("/{id}")
+    public ResponseEntity<ParkingDTO> checkOut(@PathVariable String id) {
+        var parking = parkingService.checkOut(id);
+        var result = parkingMapper.parkingDTO(parking);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id) {
         parkingService.delete(id);

@@ -2,7 +2,12 @@ package br.com.estacionalegal.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Parking {
+    @Id
     private String id;
     private String license;
     private String state;
