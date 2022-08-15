@@ -46,7 +46,7 @@ public class ParkingController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable String id) {
+    public ResponseEntity<Void> delete(@PathVariable String id) {
         parkingService.delete(id);
         return ResponseEntity.noContent().build();
     }
