@@ -18,8 +18,10 @@ import br.com.estacionalegal.controller.dto.ParkingDTO;
 import br.com.estacionalegal.controller.mapper.ParkingMapper;
 import br.com.estacionalegal.model.Parking;
 import br.com.estacionalegal.service.ParkingService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
+@SecurityRequirement(name = "basicAuth")
 @RequestMapping("/parking")
 public class ParkingController {
 
